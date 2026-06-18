@@ -189,7 +189,7 @@ nav a:hover::after {
       rgba(11, 9, 8, 0.75) 55%,
       var(--noir) 100%
     ),
-    url("./backhero.jpg");
+    url("./assets/backhero.jpg");
   background-size: cover;
   background-position: center 20%;
   z-index: -1;
