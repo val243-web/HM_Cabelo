@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "nom": "Ébène Soie",
+    "prix": "290€",
+    "type": "Perruque",
+    "image": "https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 2,
+    "nom": "Boucle Acajou",
+    "prix": "320€",
+    "type": "Perruque",
+    "image": "https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 3,
+    "nom": "Vague Cuivrée",
+    "prix": "310€",
+    "type": "Perruque",
+    "image": "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 4,
+    "nom": "Onyx Mat",
+    "prix": "280€",
+    "type": "Perruque",
+    "image": "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 5,
+    "nom": "Cacao Profond",
+    "prix": "350€",
+    "type": "Perruque",
+    "image": "https://images.unsplash.com/photo-1605497787376-9e2af8fa3528?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 6,
+    "nom": "Brume Brune",
+    "prix": "330€",
+    "type": "Perruque",
+    "image": "https://images.unsplash.com/photo-1604004555489-723a93d6ce74?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 7,
+    "nom": "Collier Aura Royale",
+    "prix": "85€",
+    "type": "Collier",
+    "image": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 8,
+    "nom": "Sautoir Nacre Impériale",
+    "prix": "120€",
+    "type": "Collier",
+    "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 9,
+    "nom": "Bracelet Jonc Doré",
+    "prix": "65€",
+    "type": "Bracelet",
+    "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 10,
+    "nom": "Bracelet Mailles Argent",
+    "prix": "75€",
+    "type": "Bracelet",
+    "image": "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 11,
+    "nom": "Bague Solitaire Éclat",
+    "prix": "110€",
+    "type": "Bague",
+    "image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=900&auto=format&fit=crop"
+  },
+  {
+    "id": 12,
+    "nom": "Bague Émeraude Céleste",
+    "prix": "140€",
+    "type": "Bague",
+    "image": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?q=80&w=900&auto=format&fit=crop"
+  }
+]

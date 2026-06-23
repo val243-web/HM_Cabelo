@@ -9,6 +9,65 @@
   --cuivre-clair: #d99a5c;
   --line: rgba(184, 116, 58, 0.25);
   --maxw: 1180px;
+
+  /* Theme-specific gradient and background overlays */
+  --hero-overlay: linear-gradient(
+    180deg,
+    rgba(11, 9, 8, 0.55) 0%,
+    rgba(11, 9, 8, 0.75) 55%,
+    var(--noir) 100%
+  );
+  --hero-radial: radial-gradient(
+    ellipse at 50% 30%,
+    rgba(184, 116, 58, 0.16),
+    transparent 60%
+  );
+  --card-overlay: linear-gradient(to top, rgba(11, 9, 8, 0.92), transparent);
+  --header-bg: linear-gradient(
+    to bottom,
+    rgba(11, 9, 8, 0.92),
+    rgba(11, 9, 8, 0)
+  );
+  --header-scrolled-bg: rgba(11, 9, 8, 0.96);
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+}
+
+/* Light Theme - veering towards sky blue and white */
+body.light-theme {
+  --noir: #ffffff; /* White background */
+  --chocolat-fonce: #f2f7fa; /* Very soft sky blue */
+  --chocolat: #e5eff5; /* Light sky blue for card backgrounds */
+  --chocolat-clair: #d1e2ed;
+  --beige: #162430; /* Dark slate blue for high readability */
+  --beige-doux: #53697a; /* Medium slate blue for secondary text */
+  --cuivre: #aa652a; /* Slightly darker copper for contrast */
+  --cuivre-clair: #8f4c18; /* Dark copper for subtitles/accents */
+  --line: rgba(170, 101, 42, 0.18);
+
+  --hero-overlay: linear-gradient(
+    180deg,
+    rgba(242, 247, 250, 0.6) 0%,
+    rgba(242, 247, 250, 0.85) 55%,
+    var(--noir) 100%
+  );
+  --hero-radial: radial-gradient(
+    ellipse at 50% 30%,
+    rgba(170, 101, 42, 0.08),
+    transparent 60%
+  );
+  --card-overlay: linear-gradient(
+    to top,
+    rgba(229, 239, 245, 0.95) 0%,
+    rgba(229, 239, 245, 0.5) 60%,
+    transparent 100%
+  );
+  --header-bg: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0)
+  );
+  --header-scrolled-bg: rgba(255, 255, 255, 0.96);
+  --overlay-bg: rgba(22, 36, 48, 0.35);
 }
 
 * {
@@ -28,6 +87,7 @@ body {
   font-weight: 300;
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 h1,
@@ -80,17 +140,14 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 1.4rem clamp(1.2rem, 4vw, 3.5rem);
-  background: linear-gradient(
-    to bottom,
-    rgba(11, 9, 8, 0.92),
-    rgba(11, 9, 8, 0)
-  );
+  background: var(--header-bg);
   transition:
     background 0.4s ease,
-    padding 0.4s ease;
+    padding 0.4s ease,
+    border-bottom 0.4s ease;
 }
 header.scrolled {
-  background: rgba(11, 9, 8, 0.96);
+  background: var(--header-scrolled-bg);
   backdrop-filter: blur(6px);
   padding: 1rem clamp(1.2rem, 4vw, 3.5rem);
   border-bottom: 1px solid var(--line);
@@ -105,6 +162,30 @@ header.scrolled {
   color: var(--cuivre-clair);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--beige);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease, transform 0.3s ease;
+  z-index: 110;
+}
+.theme-toggle:hover {
+  color: var(--cuivre-clair);
+  transform: rotate(15deg) scale(1.08);
+}
+
 nav ul {
   display: flex;
   gap: 2.6rem;
@@ -117,6 +198,7 @@ nav a {
   color: var(--beige-doux);
   position: relative;
   padding-bottom: 6px;
+  transition: color 0.3s ease;
 }
 nav a::after {
   content: "";
@@ -151,7 +233,8 @@ nav a:hover::after {
   background: var(--beige);
   transition:
     transform 0.3s ease,
-    opacity 0.3s ease;
+    opacity 0.3s ease,
+    background-color 0.3s ease;
 }
 .burger.open span:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
@@ -178,21 +261,13 @@ nav a:hover::after {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(
-      ellipse at 50% 30%,
-      rgba(184, 116, 58, 0.16),
-      transparent 60%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(11, 9, 8, 0.55) 0%,
-      rgba(11, 9, 8, 0.75) 55%,
-      var(--noir) 100%
-    ),
+    var(--hero-radial),
+    var(--hero-overlay),
     url("./assets/backhero.jpg");
   background-size: cover;
   background-position: center 20%;
   z-index: -1;
+  transition: background 0.3s ease;
 }
 .hero-content {
   max-width: 760px;
@@ -242,14 +317,20 @@ nav a:hover::after {
   font-size: 0.8rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  background: transparent;
+  cursor: pointer;
   transition:
     background 0.35s ease,
     color 0.35s ease,
-    border-color 0.35s ease;
+    border-color 0.35s ease,
+    transform 0.2s ease;
 }
 .btn:hover {
   background: var(--cuivre);
   color: var(--noir);
+}
+.btn:active {
+  transform: scale(0.98);
 }
 
 .scroll-cue {
@@ -289,6 +370,7 @@ nav a:hover::after {
 /* ===== SECTION GENERIQUE ===== */
 section {
   padding: 7rem clamp(1.2rem, 5vw, 4rem);
+  transition: background 0.3s ease;
 }
 .section-head {
   text-align: center;
@@ -301,13 +383,10 @@ section {
   margin-top: 0.7rem;
 }
 
-/* ===== COLLECTION ===== */
+/* ===== COLLECTION / PRODUITS ===== */
 .collection {
-  background: linear-gradient(
-    180deg,
-    var(--noir) 0%,
-    var(--chocolat-fonce) 100%
-  );
+  background: var(--noir);
+  border-top: 1px solid var(--line);
 }
 .grid {
   display: grid;
@@ -322,6 +401,7 @@ section {
   overflow: hidden;
   aspect-ratio: 3/4;
   background: var(--chocolat);
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 .card img {
   width: 100%;
@@ -331,6 +411,9 @@ section {
     transform 0.6s ease,
     filter 0.6s ease;
   filter: saturate(0.92) brightness(0.92);
+}
+body.light-theme .card img {
+  filter: saturate(0.96) brightness(0.98);
 }
 .card:hover img {
   transform: scale(1.06);
@@ -342,7 +425,10 @@ section {
   right: 0;
   bottom: 0;
   padding: 1.4rem 1.3rem;
-  background: linear-gradient(to top, rgba(11, 9, 8, 0.92), transparent);
+  background: var(--card-overlay);
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s ease;
 }
 .card-info .eyebrow {
   font-size: 0.62rem;
@@ -351,6 +437,19 @@ section {
 .card-info h3 {
   font-size: 1.3rem;
   color: var(--beige);
+  margin-bottom: 0.2rem;
+  transition: color 0.3s ease;
+}
+.card-info .price {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--cuivre-clair);
+  transition: color 0.3s ease;
+}
+
+.more-products-btn-container {
+  text-align: center;
+  margin-top: 3.5rem;
 }
 
 /* ===== À PROPOS ===== */
@@ -365,15 +464,20 @@ section {
   padding: 7rem clamp(1.2rem, 5vw, 4rem);
 }
 .about-img {
-  aspect-ratio: 4/5;
+  aspect-ratio: 1/1;
   overflow: hidden;
   border: 1px solid var(--line);
+  background: var(--chocolat);
 }
 .about-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: saturate(0.9) brightness(0.95);
+  transition: filter 0.3s ease;
+}
+body.light-theme .about-img img {
+  filter: saturate(0.95) brightness(1);
 }
 .about-text h2 {
   font-size: clamp(1.9rem, 3.4vw, 2.6rem);
@@ -383,7 +487,8 @@ section {
 .about-text p {
   color: var(--beige-doux);
   margin-bottom: 1.1rem;
-  max-width: 440px;
+  max-width: 480px;
+  transition: color 0.3s ease;
 }
 .stats {
   display: flex;
@@ -395,12 +500,15 @@ section {
   font-size: 2.1rem;
   color: var(--cuivre-clair);
   display: block;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 .stat-label {
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--beige-doux);
+  transition: color 0.3s ease;
 }
 
 /* ===== CONTACT ===== */
@@ -438,16 +546,20 @@ section {
   background: rgba(184, 116, 58, 0.07);
   transform: translateY(-2px);
 }
-.contact-link svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--cuivre-clair);
+body.light-theme .contact-link:hover {
+  background: rgba(184, 116, 58, 0.04);
+}
+.contact-link i {
+  font-size: 1.3rem;
+  color: var(--cuivre-clair);
   flex-shrink: 0;
+  transition: color 0.3s ease;
 }
 .contact-link span {
   font-size: 0.85rem;
   letter-spacing: 0.04em;
   color: var(--beige);
+  transition: color 0.3s ease;
 }
 
 /* ===== FOOTER ===== */
@@ -459,9 +571,134 @@ footer {
   letter-spacing: 0.06em;
   color: var(--beige-doux);
   background: var(--noir);
+  transition: background 0.3s ease, border-top 0.3s ease, color 0.3s ease;
 }
 footer span {
   color: var(--cuivre-clair);
+}
+
+/* ===== CATALOG PAGE SPECIFIC STYLES ===== */
+.products-hero {
+  position: relative;
+  min-height: 45vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 1.5rem 2rem;
+  isolation: isolate;
+}
+.mini-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    var(--hero-radial),
+    var(--hero-overlay),
+    url("./assets/backhero.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+.mini-signature-line {
+  height: 40px;
+  margin: 0 auto 1rem;
+}
+
+.catalog-section {
+  padding: 3.5rem clamp(1.2rem, 5vw, 4rem);
+  background: var(--noir);
+}
+
+.catalog-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+.search-box input {
+  width: 100%;
+  padding: 0.9rem 1.2rem 0.9rem 2.8rem;
+  background: var(--chocolat-fonce);
+  border: 1px solid var(--line);
+  color: var(--beige);
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+  border-radius: 0;
+}
+.search-box input::placeholder {
+  color: var(--beige-doux);
+  opacity: 0.6;
+}
+.search-box input:focus {
+  outline: none;
+  border-color: var(--cuivre);
+}
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--beige-doux);
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+.search-box input:focus + .search-icon {
+  color: var(--cuivre-clair);
+}
+
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.filter-btn {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--beige-doux);
+  padding: 0.6rem 1.4rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Jost", sans-serif;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  border-color: var(--cuivre);
+  color: var(--beige);
+  background: rgba(184, 116, 58, 0.1);
+}
+body.light-theme .filter-btn:hover,
+body.light-theme .filter-btn.active {
+  background: rgba(184, 116, 58, 0.05);
+}
+
+.loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--beige-doux);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.back-home-container {
+  text-align: center;
+  margin-top: 4.5rem;
 }
 
 /* ===== REVEAL ON SCROLL ===== */
@@ -525,7 +762,7 @@ footer span {
     display: flex;
     align-items: center;
     transform: translateX(100%);
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, background 0.3s ease;
     z-index: 105;
   }
   nav.open {
@@ -565,8 +802,8 @@ footer span {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 104;
+  background: var(--overlay-bg);
+  z-index: 98;
 }
 .nav-overlay.show {
   display: block;
